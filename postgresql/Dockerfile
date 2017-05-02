@@ -1,0 +1,4 @@
+FROM postgres:9.6.2
+ENV POSTGRES_USER user
+ENV POSTGRES_PASSWORD password
+ENV POSTGRES_DB db_name
