@@ -1,0 +1,9 @@
+version: "2"
+
+options:
+  verbose: true
+syncs:
+  flask-web-sync:
+    src: './web'
+    sync_strategy: 'native_osx'
+

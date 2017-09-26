@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  web:
+    restart: always
+    build: ./web
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_APP=project/app.py
+      - FLASK_DEBUG=1
+    volumes:
+      - flask-web-sync:/usr/src/app:nocopy
+    command: python -m flask run --host=0.0.0.0 --port 8000
+    depends_on:
+      - postgres
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+      - web
+    depends_on:
+      - web
+
+  data:
+    image: postgres:9.6.2
+    volumes:
+      - /var/lib/postgresql
+    command: "true"
+
+  postgres:
+    restart: always
+    build: ./postgresql
+    volumes_from:
+      - data
+    ports:
+      - "5432:5432"
+
+
+volumes:
+  flask-web-sync:
+    external: true

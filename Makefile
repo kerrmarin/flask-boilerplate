@@ -13,7 +13,18 @@ test:
 
 # Starts the server listening on port 80
 run:
-	docker-compose up --build
+	docker-compose -f docker-compose.yml up -d
+
+# Starts the server in development mode
+dev:
+	docker-sync start
+	docker-compose stop
+	docker-compose build
+	docker-compose -f docker-compose-dev.yml up -d
+
+stop:
+	docker-sync stop
+	docker-compose stop
 
 # Cleans all python artifacts
 # Deletes:
