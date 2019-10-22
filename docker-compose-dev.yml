@@ -9,8 +9,6 @@ services:
     environment:
       - FLASK_APP=project/app.py
       - FLASK_DEBUG=1
-    volumes:
-      - flask-web-sync:/usr/src/app:nocopy
     command: python -m flask run --host=0.0.0.0 --port 8000
     depends_on:
       - postgres
@@ -40,8 +38,3 @@ services:
       - data
     ports:
       - "5432:5432"
-
-
-volumes:
-  flask-web-sync:
-    external: true

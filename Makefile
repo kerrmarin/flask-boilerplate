@@ -17,13 +17,11 @@ run:
 
 # Starts the server in development mode
 dev:
-	docker-sync start
 	docker-compose stop
 	docker-compose build
 	docker-compose -f docker-compose-dev.yml up -d
 
 stop:
-	docker-sync stop
 	docker-compose stop
 
 # Cleans all python artifacts
